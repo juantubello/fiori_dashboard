@@ -1,0 +1,10 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+		confirm="handleGroupDialogConfirm">
+		<groupItems>
+			<ViewSettingsItem text="Status Fiori" key="StatusPlanCarga" selected ="true"/>
+		</groupItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

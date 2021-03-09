@@ -1,0 +1,44 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+	<ViewSettingsDialog confirm="handleFilterDialogConfirm">
+		<filterItems>
+			<ViewSettingsFilterItem text="Status Fiori" key="StatusPlanCarga" multiSelect="true">
+				<items>
+					<ViewSettingsItem text="Listo" key="StatusPlanCarga___BT___01___01"/>
+					<ViewSettingsItem text="Pendiente" key="StatusPlanCarga___BT___02___02"/>
+					<ViewSettingsItem text="En proceso" key="StatusPlanCarga___BT___03___03"/>
+				</items>
+			</ViewSettingsFilterItem>
+			<ViewSettingsFilterItem text="Plan de Carga" key="Transporte" multiSelect="true" items="{ path: 'transport>/transportesSet'}">
+				<items>
+					<ViewSettingsItem text="{transport>Transporte}" key="Transporte___EQ___{transport>Transporte}"/>
+				</items>
+			</ViewSettingsFilterItem>
+			<ViewSettingsFilterItem text="Transportista" key="Transportista" multiSelect="true" items="{ path: 'transport>/transportesSet'}">
+				<items>
+					<ViewSettingsItem text="{transport>Agservtran}" key="Agservtran___EQ___{transport>Agservtran}"/>
+				</items>
+			</ViewSettingsFilterItem>
+			<ViewSettingsFilterItem text="Puesto" key="Puesto" multiSelect="true"
+				items="{ path: 'transport>/transportesSet', group:'true' }">
+				<items>
+					<ViewSettingsItem text="{transport>Puesto}" key="Puesto___EQ___{transport>Puesto}"/>
+				</items>
+			</ViewSettingsFilterItem>
+			<ViewSettingsFilterItem text="Status SAP" key="StatusPlanCarga" multiSelect="true" items="{ path: 'transport>/transportesSet'}">
+				<items>
+					<ViewSettingsItem text="{transport>StatusPlanCarga}" key="StatusPlanCarga___EQ___{transport>StatusPlanCarga}"/>
+				</items>
+			</ViewSettingsFilterItem>
+			<ViewSettingsFilterItem text="Chapa Camión" key="Chapa Camión" multiSelect="true" items="{ path: 'transport>/transportesSet'}">
+				<items>
+					<ViewSettingsItem text="{transport>Chapacamion}" key="Chapacamion___EQ___{transport>Chapacamion}"/>
+				</items>
+			</ViewSettingsFilterItem>
+			<ViewSettingsFilterItem text="DNI" key="Dni Transportista" multiSelect="true" items="{ path: 'transport>/transportesSet'}">
+				<items>
+					<ViewSettingsItem text="{transport>Dni}" key="Dni___EQ___{transport>Dni}"/>
+				</items>
+			</ViewSettingsFilterItem>
+		</filterItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

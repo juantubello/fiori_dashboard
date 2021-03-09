@@ -1,0 +1,14 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<ViewSettingsDialog
+		confirm="handleSortDialogConfirm">
+		<sortItems>
+			<ViewSettingsItem text="Fecha ultimo estado" key="FechaUltStatusS" selected="true" />
+			<ViewSettingsItem text="Plan de Carga" key="Transporte"/>
+			<ViewSettingsItem text="Status Fiori" key="StatusPlanCarga" />
+			<ViewSettingsItem text="Status SAP" key="Sttrg" />
+			<ViewSettingsItem text="Nombre" key="Nombre" />
+		</sortItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

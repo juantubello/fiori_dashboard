@@ -1,0 +1,136 @@
+<mvc:View controllerName="dashboard_operativo.dashboard_operativo.controller.View1" xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+	xmlns="sap.m" xmlns:viz.data="sap.viz.ui5.data" xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds" xmlns:viz="sap.viz.ui5.controls"
+	xmlns:chart="sap.suite.ui.commons" xmlns:l="sap.ui.layout" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:f="sap.f"
+	xmlns:fb="sap.ui.comp.filterbar" xmlns:vm="sap.ui.comp.variants" xmlns:core="sap.ui.core">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}" class="marginBoxContent">
+					<customHeader>
+						<Toolbar>
+							<ToolbarSpacer/>
+							<Button icon="sap-icon://table-view" type="Transparent" press="onPress" ariaLabelledBy="editButtonLabel"/>
+							<ToolbarSpacer/>
+						</Toolbar>
+					</customHeader>
+					<content>
+						<!--<l:VerticalLayout class="sapUiContentPadding">-->
+						<!--	<MultiComboBox selectionChange="mcHandleSelectionChange" selectionFinish="mcHandleSelectionFinish" width="350px"-->
+						<!--			items="{ path: '/puestosSet', sorter: { path: 'Puesto' } }">-->
+						<!--			<core:Item key="{Valor}" text="{Puesto}"/>-->
+						<!--	</MultiComboBox>-->
+						<!--</l:VerticalLayout>-->
+						<l:Grid id="gridHeader" defaultSpan="L6 M6 S6">
+							<l:content>
+								<viz:VizFrame id="alistado" uiConfig="{applicationSet:'fiori'}" vizProperties="{ title: {text : 'Alistado plan de carga', visible : true}}"
+									width="100%" height="450px"></viz:VizFrame>
+								<viz:VizFrame id="transportistas" uiConfig="{applicationSet:'fiori'}" vizProperties="{ title: {text : 'Proveedores', visible : true}}"
+									width="100%" height="450px"></viz:VizFrame>
+								<viz:VizFrame id="estados" uiConfig="{applicationSet:'fiori'}" vizProperties="{ title: {text : 'Status plan de carga', visible : true}}"
+									width="100%" height="450px">
+									<viz:layoutData>
+										<l:GridData span="L8 M8 S8" indent="L1 M1 S1" linebreakL="true" linebreakM="true" linebreakS="true"/></viz:layoutData>
+								</viz:VizFrame>
+							</l:content>
+						</l:Grid>
+						<viz:Popover id="idPopOver1"></viz:Popover>
+						<viz:Popover id="idPopOver2"></viz:Popover>
+						<viz:Popover id="idPopOver3"></viz:Popover>
+						<chart:ChartContainer id="tablaDatosGrafico" showFullScreen="true" title="Vista" autoAdjustHeight="true">
+							<chart:ChartContainerContent icon="sap-icon://table-view" title="Table">
+								<chart:content>
+									<Table id="chartContainerContentTable" items="{ path: '/transportesSet', parameters: {operationMode: 'Client'} }" sticky="ColumnHeaders"
+										growing="true" growingThreshold="100" growingScrollToLoad="false">
+										<headerToolbar>
+											<OverflowToolbar>
+												<Title text="Planes de carga" level="H2"/>
+												<ToolbarSpacer/>
+												<Button tooltip="Refresh" icon="sap-icon://refresh" press="handleRefeshPressed"/>
+												<Button tooltip="Sort" icon="sap-icon://sort" press="handleSortButtonPressed"/>
+												<Button tooltip="Filter" icon="sap-icon://filter" press="handleFilterButtonPressed"/>
+												<Button tooltip="Group" icon="sap-icon://group-2" press="handleGroupButtonPressed"/>
+												<Button tooltip="Download" icon="sap-icon://excel-attachment" press="onDownload"/>
+											</OverflowToolbar>
+										</headerToolbar>
+										<infoToolbar>
+											<OverflowToolbar id="vsdFilterBar" visible="false">
+												<Text id="vsdFilterLabel"/>
+											</OverflowToolbar>
+										</infoToolbar>
+										<columns>
+											<Column demandPopin="true">
+												<Label wrapping="true" design="Bold" text="Plan de Carga"/></Column>
+											<Column demandPopin="true">
+												<Label wrapping="true" design="Bold" text="Puesto"/></Column>
+											<Column demandPopin="true">
+												<Label wrapping="true" design="Bold" text="Status Fiori"/></Column>
+											<Column demandPopin="true">
+												<Label wrapping="true" design="Bold" text="Transportista"/></Column>
+											<Column demandPopin="true">
+												<Label wrapping="true" design="Bold" text="Chapa Camión"/></Column>
+											<Column demandPopin="true">
+												<Label wrapping="true" design="Bold" text="Chapa Semi"/></Column>
+											<Column demandPopin="true">
+												<Label wrapping="true" design="Bold" text="Nombre"/></Column>
+											<Column demandPopin="true">
+												<Label wrapping="true" design="Bold" text="DNI"/></Column>
+											<Column demandPopin="true">
+												<Label wrapping="true" design="Bold" text="Creación"/></Column>
+											<Column demandPopin="true">
+												<Label wrapping="true" design="Bold" text="Status SAP"/></Column>
+											<!--<Column demandPopin="true">-->
+											<!--	<Label design="Bold" text="Status global"/></Column>-->
+											<Column demandPopin="true">
+												<Label wrapping="true" design="Bold" text="Fecha ultimo estado"/></Column>
+											<Column demandPopin="true">
+												<Label wrapping="true" design="Bold" text="Hora ultimo estado"/></Column>
+											<!--	<Column demandPopin="true">
+												<Label wrapping="true" design="Bold" text="Hora ultimo estado2"/></Column>	-->
+										</columns>
+										<items>
+											<ColumnListItem press="onPress">
+												<cells>
+													<Text text="{Transporte}"></Text>
+													<Text text="{Puesto}"></Text>
+													<!--			<Text id="SPC" text="{ path: 'StatusPlanCarga',
+														formatter: '.formatter.DescStatus'}"></Text>-->
+													<ObjectStatus id="SPC" text="{ path: 'StatusPlanCarga', formatter: '.formatter.DescStatus'}"
+														state="{ path: 'StatusPlanCarga', formatter: '.formatter.StateStatus'}"/>
+													<Text text="{Agservtran}"></Text>
+													<Text text="{Chapacamion}"></Text>
+													<Text text="{Chapasemi}"></Text>
+													<Text text="{Nombre}"></Text>
+													<Text text="{Dni}"></Text>
+													<Text text="{Creacion}"></Text>
+												<!--	<Text text="{Status}"></Text>-->
+													<FormattedText
+														id="StatusModif2"
+														visible="true"
+														htmlText="{path:'Status', formatter:'.formatter.setColorText'}"
+														textDirection="Inherit"
+														textAlign="Begin">
+														
+													</FormattedText>
+												<!--	<Text id='StatusModif2' text="{path:'Status', formatter:'.formatter.colorFormatter'}"></Text>-->
+													<!--	<Label id='StatusModif2' text="{path:'Status', formatter:'.formatter.colorFormatter'}"/>-->
+													<!--<Text text="{Sttrg}"></Text>-->
+													<Text text="{FechaUltStatus}"></Text>
+													<Text text="{HoraUltStatus}"></Text>
+													<!--<Text text="{FechaUltStatusS}"></Text>-->
+												</cells>
+											</ColumnListItem>
+										</items>
+									</Table>
+								</chart:content>
+							</chart:ChartContainerContent>
+						</chart:ChartContainer>
+						<l:VerticalLayout class="sapUiContentPadding" width="100%">
+							<ObjectStatus id="timer" class="sapMObjectStatusLarge" title="Auto Refresh En" text="00:05:00" icon="sap-icon://message-information"
+								state="Information"/>
+						</l:VerticalLayout>
+					</content>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>
